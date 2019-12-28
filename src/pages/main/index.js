@@ -8,6 +8,10 @@ import ENV from '../../env';
 const Main = ({ changeGameStatus, playersNames, savePlayerNames }) => {
 
     const enviaJogadores = () => {
+        if (playersNames.player1 === '' || playersNames.player2 === '') {
+            alert('Você deve preencher os nomes dos jogadores');
+            return;
+        }
         changeGameStatus(ENV.GAME_STATUS.RUNNING);
     }
 
