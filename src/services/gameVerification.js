@@ -5,12 +5,12 @@ export function verifyWin(playsMatrix) {
     if (hasPlayerOneWon(playsMatrix)) {
         return {
             'done': true,
-            'winner': 'PLAYER_1'
+            'winner': 'player1'
         }
     } else if (hasPlayerTwoWon(playsMatrix)) {
         return {
             'done': true,
-            'winner': 'PLAYER_2'
+            'winner': 'player2'
         }
     }
 
@@ -19,8 +19,17 @@ export function verifyWin(playsMatrix) {
     }
 };
 
-export function verifyDraw(playsMatrix) {
+export function verifyDraw(playsMatrix, round) {
+    const pointsMatrix = getPointsMatrix(playsMatrix);
 
+    let drawPointsCount = pointsMatrix.filter(value => {
+        if (round === 8 && value === - 2) {
+            return true;
+        }
+        return value === -1 || value === 0 || value === 1;
+    }).length;
+
+    return drawPointsCount === pointsMatrix.length;
 }
 
 function getHorizontalPoints(playsMatrix) {
@@ -51,22 +60,22 @@ function getArrayColumn(arr, columnNumber) {
 
 function hasPlayerOneWon(playsMatrix) {
 
-    const pointsMatrix = getPointsMatrix(playsMatrix)
+    const pointsMatrix = getPointsMatrix(playsMatrix);
     const isWinner = pointsMatrix.find(val => val === ENV.PLAYERS.PLAYER_1.WIN_VALUE) !== undefined;
     return isWinner;
 }
 
 
 function hasPlayerTwoWon(playsMatrix) {
-    const pointsMatrix = getPointsMatrix(playsMatrix)
+    const pointsMatrix = getPointsMatrix(playsMatrix);
     const isWinner = pointsMatrix.find(val => val === ENV.PLAYERS.PLAYER_2.WIN_VALUE) !== undefined;
     return isWinner;
 }
 
 function getPointsMatrix(playsMatrix) {
     let pointsMatrix = getHorizontalPoints(playsMatrix).concat(getVerticalPoints(playsMatrix));
-    
+
     pointsMatrix.push(getDiagonalPoints(playsMatrix));
-    
+
     return pointsMatrix;
 }
