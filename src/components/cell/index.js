@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './styles.css'
 
-const Cell = ({cell, playsMatrix, cellKey, onClick}) => {
+const Cell = ({cell, callbackParent}) => {
 
-    const [classe, setClasse] = useState(cell === 1 ? 'far fa-2x fa-circle' : '');
-
-    function makeAPlay(event) {
-        // Here, we invoke the callback with the new value
-        let newPlayMatrix = playsMatrix;
-        const [parentIndex, index] = cellKey.split(' ')
-        newPlayMatrix[parentIndex][index] = 1;
-        setClasse('far fa-2x fa-circle')
-        onClick(newPlayMatrix);
+    let classe = '';
+    
+    if (cell === 1) {
+        classe = 'far fa-2x fa-circle';
+    } else if (cell === -1) {
+        classe = 'fas fa-2x fa-times';
     }
 
     return (
-        <div className='cell' onClick={makeAPlay}>
+        <div className='cell' onClick={callbackParent}>
             <i className={classe}></i>
         </div>
     );
