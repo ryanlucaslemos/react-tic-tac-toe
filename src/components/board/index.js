@@ -6,7 +6,7 @@ import ENV from '../../env'
 import { verifyWin, verifyDraw } from '../../services/gameVerification';
 
 
-const Board = () => {
+const Board = ({ playersNames }) => {
     const [playsMatrix, setPlaysMatrix] = useState([
         Array(3).fill(0),
         Array(3).fill(0),
@@ -51,9 +51,16 @@ const Board = () => {
             let game = verifyWin(newPlayMatrix);
 
             if (game.done) {
-                alert(`O jogador ${game.winner} venceu`)
+                alert(`O jogador ${playersNames[game.winner]} venceu`)
             }
         }
+
+        if (round > 6) {
+            if (verifyDraw(playsMatrix, round)) {
+                alert('Deu velha!');
+            }
+        }
+
         setPlaysMatrix(newPlayMatrix);
         setRound(round + 1)
     };
