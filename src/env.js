@@ -14,6 +14,11 @@ const ENV = {
         'NONE': {
             'PLAY_VALUE': 0
         }
+    },
+    'GAME_STATUS': {
+        'NOT_STARTED': 0,
+        'RUNNING': 1,
+        'FINISHED': 2
     }
 };
 
