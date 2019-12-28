@@ -1,21 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
 import './styles.css'
 
-const Main = () => {
+import ENV from '../../env';
 
-    const [jogadores, setJogadores] = useState({'jogador1': '', 'jogador2': ''});
+const Main = ({ changeGameStatus, playersNames, savePlayerNames }) => {
 
     const enviaJogadores = () => {
-        console.log(jogadores);
-    }
-
-    const salvaNomeJogadores = fieldName => (event) => {
-        setJogadores({
-            ...jogadores,
-            [fieldName]: event.target.value
-        })
+        changeGameStatus(ENV.GAME_STATUS.RUNNING);
     }
 
     return (
@@ -29,7 +22,7 @@ const Main = () => {
                         <div className='row'>
 
                             <label>Nome:</label>
-                            <input onChange={salvaNomeJogadores('jogador1')} type='text' value={jogadores.jogador1} />
+                            <input onChange={savePlayerNames('player1')} type='text' value={playersNames.player1} />
 
                         </div>
                     </div>
@@ -39,10 +32,9 @@ const Main = () => {
                             <h5>Jogador 2</h5>
                         </div>
                         <div className='row'>
-                    
-                            <label>Nome:</label>
-                            <input type='text' onChange={salvaNomeJogadores('jogador2')} value={jogadores.jogador2} />
 
+                            <label>Nome:</label>
+                            <input type='text' onChange={savePlayerNames('player2')} value={playersNames.jogador2} />
                         </div>
                     </div>
                 </div>
