@@ -1,15 +1,16 @@
 import React from 'react';
 
 import './styles.css'
+import ENV from '../../env';
 
-const Cell = ({cell, callbackParent}) => {
+const Cell = ({ cell, callbackParent }) => {
 
     let classe = '';
-    
-    if (cell === 1) {
-        classe = 'far fa-2x fa-circle';
-    } else if (cell === -1) {
-        classe = 'fas fa-2x fa-times';
+
+    if (cell === ENV.PLAYERS.PLAYER_2.PLAY_VALUE) {
+        classe = ENV.PLAYERS.PLAYER_2.CSS_CLASS;
+    } else if (cell === ENV.PLAYERS.PLAYER_1.PLAY_VALUE) {
+        classe = ENV.PLAYERS.PLAYER_1.CSS_CLASS;
     }
 
     return (
