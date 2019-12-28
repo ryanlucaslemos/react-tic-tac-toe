@@ -1,0 +1,7 @@
+.board-row {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    flex-basis: 100%;
+    min-height: 100px;
+}
