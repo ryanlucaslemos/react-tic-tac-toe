@@ -17,7 +17,7 @@ const Main = ({ changeGameStatus, players, savePlayerNames }) => {
 
     return (
         <div>
-            <div className='container'>
+            <div className=''>
                 <div className='row'>
                     <div className='users-box'>
                         <div className='row'>

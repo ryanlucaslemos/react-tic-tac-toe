@@ -1,7 +1,7 @@
 .score-board-row {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
 }
 .score-board {
     border: 2px solid #75737371;
@@ -10,7 +10,6 @@
     min-height: 50px;
     background: rgb(253, 253, 253);
     margin-bottom: 40px;
-    margin-right: 20px;
     min-width: 200px;   
     text-align: center;
 }

@@ -75,7 +75,9 @@ function App() {
 
   if (gameStatus === GAME_STATUS.NOT_STARTED) {
     return (
-      <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
+      <div className='container'>
+        <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
+      </div>
     );
   }
   else if (gameStatus === GAME_STATUS.FINISHED) {
