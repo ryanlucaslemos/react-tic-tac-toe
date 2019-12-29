@@ -1,6 +1,7 @@
 .score-board-row {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .score-board {
     border: 2px solid #75737371;
