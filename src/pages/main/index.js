@@ -3,16 +3,16 @@ import React from 'react';
 
 import './styles.css'
 
-import ENV from '../../env';
+import GAME_MODEL from '../../game.model';
 
-const Main = ({ changeGameStatus, playersNames, savePlayerNames }) => {
+const Main = ({ changeGameStatus, players, savePlayerNames }) => {
 
     const enviaJogadores = () => {
-        if (playersNames.player1 === '' || playersNames.player2 === '') {
+        if (players.player1.name === '' || players.player2.name === '') {
             alert('Você deve preencher os nomes dos jogadores');
             return;
         }
-        changeGameStatus(ENV.GAME_STATUS.RUNNING);
+        changeGameStatus(GAME_MODEL.GAME_STATUS.RUNNING);
     }
 
     return (
@@ -26,7 +26,7 @@ const Main = ({ changeGameStatus, playersNames, savePlayerNames }) => {
                         <div className='row'>
 
                             <label>Nome:</label>
-                            <input onChange={savePlayerNames('player1')} type='text' value={playersNames.player1} />
+                            <input onChange={savePlayerNames('player1')} type='text' value={players.player1.name} />
 
                         </div>
                     </div>
@@ -38,7 +38,7 @@ const Main = ({ changeGameStatus, playersNames, savePlayerNames }) => {
                         <div className='row'>
 
                             <label>Nome:</label>
-                            <input type='text' onChange={savePlayerNames('player2')} value={playersNames.jogador2} />
+                            <input type='text' onChange={savePlayerNames('player2')} value={players.player2.name} />
                         </div>
                     </div>
                 </div>

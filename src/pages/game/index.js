@@ -4,10 +4,10 @@ import './styles.css';
 import Board from '../../components/board';
 
 
-const Game = () => {
+const Game = ({ players }) => {
     return (
         <div className='container'>
-            <Board />
+            <Board players={players} />
         </div>
     );
 }

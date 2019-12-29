@@ -1,5 +1,5 @@
 
-const ENV = {
+const GAME_MODEL = {
     'PLAYERS': {
         'PLAYER_1': {
             'CSS_CLASS': 'fas fa-times fa-2x',
@@ -29,4 +29,4 @@ const ENV = {
     }
 };
 
-export default ENV;
+export default GAME_MODEL;

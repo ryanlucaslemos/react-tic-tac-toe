@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import './styles.css';
 import Cell from '../cell'
-import ENV from '../../env'
+import GAME_MODEL from '../../game.model'
 import { verifyWin, verifyDraw } from '../../services/gameVerification';
 
 
-const Board = ({ playersNames }) => {
+const Board = ({ players }) => {
     const [playsMatrix, setPlaysMatrix] = useState([
         Array(3).fill(0),
         Array(3).fill(0),
@@ -39,19 +39,20 @@ const Board = ({ playersNames }) => {
 
         let newPlayMatrix = playsMatrix.concat([]);
 
-        if (newPlayMatrix[parentIndex][index] !== ENV.PLAYERS.NONE.PLAY_VALUE) return;
+        if (newPlayMatrix[parentIndex][index] !== GAME_MODEL.PLAYERS.NONE.PLAY_VALUE) return;
 
         if (round % 2 !== 0) {
-            newPlayMatrix[parentIndex][index] = ENV.PLAYERS.PLAYER_1.PLAY_VALUE;
+            newPlayMatrix[parentIndex][index] = GAME_MODEL.PLAYERS.PLAYER_1.PLAY_VALUE;
         } else {
-            newPlayMatrix[parentIndex][index] = ENV.PLAYERS.PLAYER_2.PLAY_VALUE;
+            newPlayMatrix[parentIndex][index] = GAME_MODEL.PLAYERS.PLAYER_2.PLAY_VALUE;
         }
 
         if (round > 4) {
             let game = verifyWin(newPlayMatrix);
 
             if (game.done) {
-                alert(`O jogador ${playersNames[game.winner]} venceu`)
+                players[game.winner]['wins'] += 1;
+                alert(`O jogador ${players[game.winner].name} venceu`);
             }
         }
 
