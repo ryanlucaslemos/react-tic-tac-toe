@@ -28,7 +28,7 @@ const Board = ({ playersNames }) => {
         const cellKey = `${parentKey} ${index}`;
 
         return (
-            <Cell key={cellKey} cell={cellValue} callbackParent={makeAMove(cellKey)} />
+            <Cell key={cellKey} cellKey={cellKey} cell={cellValue} callbackParent={makeAMove(cellKey)} />
         );
     };
 

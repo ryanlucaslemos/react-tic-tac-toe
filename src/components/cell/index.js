@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.css'
 import ENV from '../../env';
 
-const Cell = ({ cell, callbackParent }) => {
+const Cell = ({ cell, callbackParent, cellKey }) => {
 
     let classe = '';
 
@@ -14,7 +14,7 @@ const Cell = ({ cell, callbackParent }) => {
     }
 
     return (
-        <div className='cell' onClick={callbackParent}>
+        <div className={`${ENV.CELL_STYLES[cellKey]} cell`} onClick={callbackParent}>
             <i className={classe}></i>
         </div>
     );

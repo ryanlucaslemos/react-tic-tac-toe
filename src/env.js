@@ -19,6 +19,13 @@ const ENV = {
         'NOT_STARTED': 0,
         'RUNNING': 1,
         'FINISHED': 2
+    },
+    'CELL_STYLES': {
+        '0 1': 'v-border',
+        '1 0': 'h-border',
+        '1 1': 'v-border h-border',
+        '1 2': 'h-border',
+        '2 1': 'v-border'
     }
 };
 
