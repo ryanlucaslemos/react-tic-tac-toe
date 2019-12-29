@@ -4,11 +4,9 @@ import './styles.css';
 import Board from '../../components/board';
 
 
-const Game = ({ players }) => {
+const Game = ({ players, changeGameStatus, increaseWins, increaseDraws, playsMatrix, changePlaysMatrix }) => {
     return (
-        <div className='container'>
-            <Board players={players} />
-        </div>
+        <Board playsMatrix={playsMatrix} changePlaysMatrix={changePlaysMatrix} players={players} changeGameStatus={changeGameStatus} increaseWins={increaseWins} increaseDraws={increaseDraws} />
     );
 }
 

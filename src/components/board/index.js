@@ -6,14 +6,12 @@ import GAME_MODEL from '../../game.model'
 import { verifyWin, verifyDraw } from '../../services/gameVerification';
 
 
-const Board = ({ players }) => {
-    const [playsMatrix, setPlaysMatrix] = useState([
-        Array(3).fill(0),
-        Array(3).fill(0),
-        Array(3).fill(0)
-    ]);
+const Board = ({playsMatrix, changePlaysMatrix,  players, changeGameStatus, increaseWins, increaseDraws }) => {
+
 
     const [round, setRound] = useState(1);
+
+    const { PLAYERS: { PLAYER_1, PLAYER_2, NONE }, GAME_STATUS } = GAME_MODEL;
 
     const renderLine = (line, index) => {
         return (
@@ -39,30 +37,29 @@ const Board = ({ players }) => {
 
         let newPlayMatrix = playsMatrix.concat([]);
 
-        if (newPlayMatrix[parentIndex][index] !== GAME_MODEL.PLAYERS.NONE.PLAY_VALUE) return;
+        if (newPlayMatrix[parentIndex][index] !== NONE.PLAY_VALUE) return;
+
 
         if (round % 2 !== 0) {
-            newPlayMatrix[parentIndex][index] = GAME_MODEL.PLAYERS.PLAYER_1.PLAY_VALUE;
+            newPlayMatrix[parentIndex][index] = PLAYER_1.PLAY_VALUE;
         } else {
-            newPlayMatrix[parentIndex][index] = GAME_MODEL.PLAYERS.PLAYER_2.PLAY_VALUE;
+            newPlayMatrix[parentIndex][index] = PLAYER_2.PLAY_VALUE;
         }
 
-        if (round > 4) {
-            let game = verifyWin(newPlayMatrix);
 
-            if (game.done) {
-                players[game.winner]['wins'] += 1;
-                alert(`O jogador ${players[game.winner].name} venceu`);
-            }
+        let game = verifyWin(newPlayMatrix);
+
+        if (round > 4 && game.done) {
+            increaseWins(game.winner);
+            changeGameStatus(GAME_STATUS.FINISHED);
         }
 
-        if (round > 6) {
-            if (verifyDraw(playsMatrix, round)) {
-                alert('Deu velha!');
-            }
+        else if (round > 6 && verifyDraw(playsMatrix, round)) {
+            increaseDraws();
+            changeGameStatus(GAME_STATUS.FINISHED);
         }
 
-        setPlaysMatrix(newPlayMatrix);
+        changePlaysMatrix(newPlayMatrix);
         setRound(round + 1)
     };
 
