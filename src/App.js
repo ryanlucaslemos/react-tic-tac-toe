@@ -1,31 +1,43 @@
 import React, { useState } from 'react';
 
 import Main from './pages/main'
-import Board from './components/board';
-import ENV from './env'
+import GAME_MODEL from './game.model'
+import Game from './pages/game';
 
 function App() {
-  const [gameStatus, setGameStatus] = useState(ENV.GAME_STATUS.NOT_STARTED);
-  const [playersNames, setNames] = useState({ 'player1': '', 'player2': '' });
+  const [gameStatus, setGameStatus] = useState(GAME_MODEL.GAME_STATUS.NOT_STARTED);
+  const [players, setPlayers] = useState({
+    'player1': {
+      'name': '',
+      'wins': 0
+    },
+    'player2': {
+      'name': '',
+      'wins': 0
+    }
+  });
 
   const changeGameStatus = (status) => {
     setGameStatus(status);
   }
   const savePlayerNames = fieldName => (event) => {
-    setNames({
-      ...playersNames,
-      [fieldName]: event.target.value
+    setPlayers({
+      ...players,
+      [fieldName]: {
+        'name': event.target.value,
+        'wins': 0
+      }
     });
   }
 
-  if (gameStatus === ENV.GAME_STATUS.NOT_STARTED) {
+  if (gameStatus === GAME_MODEL.GAME_STATUS.NOT_STARTED) {
     return (
-      <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} playersNames={playersNames} />
+      <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
     );
   }
 
   return (
-    <Board playersNames={playersNames} />
+    <Game players={players}/>
   );
 }
 
