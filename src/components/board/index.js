@@ -64,7 +64,7 @@ const Board = ({playsMatrix, changePlaysMatrix,  players, changeGameStatus, incr
     };
 
     return (
-        <div className='container'>
+        <div className=''>
             {
                 playsMatrix.map(renderLine)
             }
