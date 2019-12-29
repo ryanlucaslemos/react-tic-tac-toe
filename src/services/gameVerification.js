@@ -1,4 +1,4 @@
-import ENV from '../env'
+import GAME_MODEL from '../game.model'
 
 export function verifyWin(playsMatrix) {
 
@@ -39,7 +39,7 @@ function getHorizontalPoints(playsMatrix) {
 }
 
 function getDiagonalPoints(playsMatrix) {
-    return playsMatrix[0][0] + playsMatrix[1][1] + playsMatrix[2][2];
+    return [playsMatrix[0][0] + playsMatrix[1][1] + playsMatrix[2][2], playsMatrix[0][2] + playsMatrix[1][1] + playsMatrix[2][0]];
 }
 
 function getVerticalPoints(playsMatrix) {
@@ -61,21 +61,21 @@ function getArrayColumn(arr, columnNumber) {
 function hasPlayerOneWon(playsMatrix) {
 
     const pointsMatrix = getPointsMatrix(playsMatrix);
-    const isWinner = pointsMatrix.find(val => val === ENV.PLAYERS.PLAYER_1.WIN_VALUE) !== undefined;
+    const isWinner = pointsMatrix.find(val => val === GAME_MODEL.PLAYERS.PLAYER_1.WIN_VALUE) !== undefined;
     return isWinner;
 }
 
 
 function hasPlayerTwoWon(playsMatrix) {
     const pointsMatrix = getPointsMatrix(playsMatrix);
-    const isWinner = pointsMatrix.find(val => val === ENV.PLAYERS.PLAYER_2.WIN_VALUE) !== undefined;
+    const isWinner = pointsMatrix.find(val => val === GAME_MODEL.PLAYERS.PLAYER_2.WIN_VALUE) !== undefined;
     return isWinner;
 }
 
 function getPointsMatrix(playsMatrix) {
     let pointsMatrix = getHorizontalPoints(playsMatrix).concat(getVerticalPoints(playsMatrix));
 
-    pointsMatrix.push(getDiagonalPoints(playsMatrix));
+    pointsMatrix =  pointsMatrix.concat(getDiagonalPoints(playsMatrix));
 
     return pointsMatrix;
 }
