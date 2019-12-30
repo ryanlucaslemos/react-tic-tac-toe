@@ -5,6 +5,8 @@ import GAME_MODEL from './game.model'
 import Game from './pages/game';
 import EndGame from './pages/endgame';
 import ScoreBoard from './components/score-board';
+import Footer from './components/footer';
+import Header from './components/header';
 
 function App() {
   const { GAME_STATUS } = GAME_MODEL;
@@ -69,31 +71,47 @@ function App() {
     setDraws(draws + 1);
   };
 
+  const increaseScore = (player = null) => {
+    if (player === null) {
+      increaseDraws();
+      return;
+    }
+    increaseWins(player);
+  }
+
   const changePlaysMatrix = (playsMatrix) => {
     setPlaysMatrix(playsMatrix)
   };
 
-  if (gameStatus === GAME_STATUS.NOT_STARTED) {
-    return (
-      <div className='container'>
-        <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
-      </div>
-    );
-  }
-  else if (gameStatus === GAME_STATUS.FINISHED) {
-    return (
-      <div className='container'>
-        <ScoreBoard players={players} draws={draws} />
-        <EndGame changeGameStatus={changeGameStatus} changePlaysMatrix={changePlaysMatrix} lastWinner={lastWinner} />
-      </div>
-
-    );
-  }
 
   return (
+
     <div className='container'>
-      <ScoreBoard players={players} draws={draws} />
-      <Game playsMatrix={playsMatrix} changePlaysMatrix={changePlaysMatrix} players={players} increaseWins={increaseWins} changeGameStatus={changeGameStatus} increaseDraws={increaseDraws} />
+      <Header />
+
+      {
+        gameStatus === GAME_STATUS.FINISHED &&
+        <div>
+          <ScoreBoard players={players} draws={draws} />
+          <EndGame changeGameStatus={changeGameStatus} changePlaysMatrix={changePlaysMatrix} lastWinner={lastWinner} />
+        </div>
+      }
+
+      {
+        gameStatus === GAME_STATUS.NOT_STARTED &&
+
+        <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
+      }
+
+      {
+        gameStatus === GAME_STATUS.RUNNING &&
+        <div>
+          <ScoreBoard players={players} draws={draws} />
+          <Game playsMatrix={playsMatrix} changePlaysMatrix={changePlaysMatrix} increaseScore={increaseScore} changeGameStatus={changeGameStatus} />
+        </div>
+      }
+
+      <Footer />
     </div>
   );
 }

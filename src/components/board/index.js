@@ -6,7 +6,7 @@ import GAME_MODEL from '../../game.model'
 import { verifyWin, verifyDraw } from '../../services/gameVerification';
 
 
-const Board = ({playsMatrix, changePlaysMatrix,  players, changeGameStatus, increaseWins, increaseDraws }) => {
+const Board = ({ playsMatrix, changePlaysMatrix, changeGameStatus, increaseScore }) => {
 
 
     const [round, setRound] = useState(1);
@@ -50,12 +50,12 @@ const Board = ({playsMatrix, changePlaysMatrix,  players, changeGameStatus, incr
         let game = verifyWin(newPlayMatrix);
 
         if (round > 4 && game.done) {
-            increaseWins(game.winner);
+            increaseScore(game.winner);
             changeGameStatus(GAME_STATUS.FINISHED);
         }
 
         else if (round > 6 && verifyDraw(playsMatrix, round)) {
-            increaseDraws();
+            increaseScore();
             changeGameStatus(GAME_STATUS.FINISHED);
         }
 
