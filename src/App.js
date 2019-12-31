@@ -8,6 +8,8 @@ import ScoreBoard from './components/score-board';
 import Footer from './components/footer';
 import Header from './components/header';
 
+import './styles.css';
+
 function App() {
   const { GAME_STATUS } = GAME_MODEL;
 
@@ -85,32 +87,35 @@ function App() {
 
 
   return (
-
-    <div className='container'>
+    <div >
       <Header />
+      <div className='container'>
 
-      {
-        gameStatus === GAME_STATUS.FINISHED &&
-        <div>
-          <ScoreBoard players={players} draws={draws} />
-          <EndGame changeGameStatus={changeGameStatus} changePlaysMatrix={changePlaysMatrix} lastWinner={lastWinner} />
-        </div>
-      }
 
-      {
-        gameStatus === GAME_STATUS.NOT_STARTED &&
+        {
+          gameStatus === GAME_STATUS.FINISHED &&
+          <div>
+            <ScoreBoard players={players} draws={draws} />
+            <EndGame changeGameStatus={changeGameStatus} changePlaysMatrix={changePlaysMatrix} lastWinner={lastWinner} />
+          </div>
+        }
 
-        <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
-      }
+        {
+          gameStatus === GAME_STATUS.NOT_STARTED &&
 
-      {
-        gameStatus === GAME_STATUS.RUNNING &&
-        <div>
-          <ScoreBoard players={players} draws={draws} />
-          <Game playsMatrix={playsMatrix} changePlaysMatrix={changePlaysMatrix} increaseScore={increaseScore} changeGameStatus={changeGameStatus} />
-        </div>
-      }
+          <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
+        }
 
+        {
+          gameStatus === GAME_STATUS.RUNNING &&
+          <div>
+            <ScoreBoard players={players} draws={draws} />
+            <Game playsMatrix={playsMatrix} changePlaysMatrix={changePlaysMatrix} increaseScore={increaseScore} changeGameStatus={changeGameStatus} />
+          </div>
+        }
+
+
+      </div>
       <Footer />
     </div>
   );
