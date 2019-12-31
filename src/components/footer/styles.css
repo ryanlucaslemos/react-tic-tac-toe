@@ -1,0 +1,25 @@
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    position: absolute;
+    bottom: 0;
+    background: rgb(20, 20, 20);
+    color: #fff;
+    width: 100%;
+    padding: 7px 0px;
+}
+
+p {
+    font-size: 17px;
+    margin: 5px 0px;  
+}
+
+p a {
+    color: tomato;
+}
+
+p a:hover {
+    color: blue;
+}
