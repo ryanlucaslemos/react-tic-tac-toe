@@ -6,11 +6,10 @@
 .score-board {
     border: 2px solid #75737371;
     border-radius: 4px;
-    padding: 20px;
-    min-height: 50px;
+    padding: 20px 35px;
+    min-height: 70px;
     background: rgb(253, 253, 253);
-    margin-bottom: 40px;
-    min-width: 200px;   
+    margin: 40px 0px;   
     text-align: center;
 }
 
@@ -21,4 +20,16 @@
 
 .score-board p {
     font-size: 17px;
+}
+
+.score-board hr {
+    margin: 8px 0px;
+}
+
+.draws-style {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
 }
