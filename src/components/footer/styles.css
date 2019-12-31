@@ -3,7 +3,7 @@ footer {
     justify-content: center;
     align-items: center;
     flex-flow: column wrap;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background: rgb(20, 20, 20);
     color: #fff;
