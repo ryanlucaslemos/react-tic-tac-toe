@@ -64,7 +64,7 @@ const Board = ({ playsMatrix, changePlaysMatrix, changeGameStatus, increaseScore
     };
 
     return (
-        <div className=''>
+        <div className='board-style'>
             {
                 playsMatrix.map(renderLine)
             }

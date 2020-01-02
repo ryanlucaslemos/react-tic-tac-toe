@@ -5,3 +5,7 @@
     flex-basis: 100%;
     min-height: 100px;
 }
+
+.board-style {
+    padding-bottom: 60px;
+}

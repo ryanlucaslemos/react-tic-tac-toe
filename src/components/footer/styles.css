@@ -1,19 +1,15 @@
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column wrap;
-    position: fixed;
-    bottom: 0;
     background: rgb(20, 20, 20);
     color: #fff;
     width: 100%;
-    padding: 7px 0px;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 p {
     font-size: 17px;
-    margin: 5px 0px;  
+    margin-bottom: 5px;
 }
 
 p a {
