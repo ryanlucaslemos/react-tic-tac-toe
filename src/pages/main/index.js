@@ -7,7 +7,8 @@ import GAME_MODEL from '../../game.model';
 
 const Main = ({ changeGameStatus, players, savePlayerNames }) => {
 
-    const enviaJogadores = () => {
+    const enviaJogadores = (evt) => {
+        evt.preventDefault();
         if (players.player1.name === '' || players.player2.name === '') {
             alert('Você deve preencher os nomes dos jogadores');
             return;
@@ -16,7 +17,7 @@ const Main = ({ changeGameStatus, players, savePlayerNames }) => {
     }
 
     return (
-        <div>
+        <form onSubmit={enviaJogadores} noValidate>
             <div className=''>
                 <div className='row'>
                     <div className='users-box'>
@@ -44,10 +45,10 @@ const Main = ({ changeGameStatus, players, savePlayerNames }) => {
                 </div>
 
                 <div className='row'>
-                    <button onClick={enviaJogadores}>Jogar</button>
+                    <button type='submit'>Jogar</button>
                 </div>
             </div>
-        </div>
+        </form>
 
     );
 };

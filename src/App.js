@@ -30,7 +30,6 @@ function App() {
 
   const [draws, setDraws] = useState(0);
 
-
   const [playsMatrix, setPlaysMatrix] = useState([
     Array(3).fill(0),
     Array(3).fill(0),
