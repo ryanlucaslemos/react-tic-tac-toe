@@ -85,35 +85,46 @@ function App() {
   };
 
 
-  return (
-    <div >
-      <Header />
-      <div className='container'>
+  const render = () => {
 
-
-        {
-          gameStatus === GAME_STATUS.FINISHED &&
+    switch (gameStatus) {
+      case GAME_STATUS.FINISHED:
+        return (
           <div>
             <ScoreBoard players={players} draws={draws} />
             <EndGame changeGameStatus={changeGameStatus} changePlaysMatrix={changePlaysMatrix} lastWinner={lastWinner} />
           </div>
-        }
+        );
 
-        {
-          gameStatus === GAME_STATUS.NOT_STARTED &&
-
+      case GAME_STATUS.NOT_STARTED:
+        return (
           <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
-        }
+        );
 
-        {
-          gameStatus === GAME_STATUS.RUNNING &&
+      case GAME_STATUS.RUNNING:
+        return (
           <div>
             <ScoreBoard players={players} draws={draws} />
             <Game playsMatrix={playsMatrix} changePlaysMatrix={changePlaysMatrix} increaseScore={increaseScore} changeGameStatus={changeGameStatus} />
           </div>
-        }
+        );
+
+      default:
+        return (
+          <div>
+            <h1>Invalid game status</h1>
+          </div>
+        );
+    }
+
+  }
 
 
+  return (
+    <div >
+      <Header />
+      <div className='container'>
+        {render()}
       </div>
       <Footer />
     </div>
