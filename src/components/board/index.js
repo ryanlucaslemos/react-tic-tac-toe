@@ -49,12 +49,12 @@ const Board = ({ playsMatrix, changePlaysMatrix, changeGameStatus, increaseScore
 
         let game = verifyWin(newPlayMatrix);
 
-        if (round > 4 && game.done) {
+        if (round > GAME_MODEL.WIN.ROUND && game.done) {
             increaseScore(game.winner);
             changeGameStatus(GAME_STATUS.FINISHED);
         }
 
-        else if (round > 6 && verifyDraw(playsMatrix, round)) {
+        else if (round > GAME_MODEL.DRAW.ROUND && verifyDraw(playsMatrix, round)) {
             increaseScore();
             changeGameStatus(GAME_STATUS.FINISHED);
         }

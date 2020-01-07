@@ -23,10 +23,7 @@ export function verifyDraw(playsMatrix, round) {
     const pointsMatrix = getPointsMatrix(playsMatrix);
 
     let drawPointsCount = pointsMatrix.filter(value => {
-        if (round === 8 && value === - 2) {
-            return true;
-        }
-        return value === -1 || value === 0 || value === 1;
+        return isADrawValue(value, round);
     }).length;
 
     return drawPointsCount === pointsMatrix.length;
@@ -75,7 +72,15 @@ function hasPlayerTwoWon(playsMatrix) {
 function getPointsMatrix(playsMatrix) {
     let pointsMatrix = getHorizontalPoints(playsMatrix).concat(getVerticalPoints(playsMatrix));
 
-    pointsMatrix =  pointsMatrix.concat(getDiagonalPoints(playsMatrix));
+    pointsMatrix = pointsMatrix.concat(getDiagonalPoints(playsMatrix));
 
     return pointsMatrix;
+}
+
+function isADrawValue(value, round) {
+    const { DRAW: { PLAY_VALUES }, PLAYERS: { PLAYER_1 }, ROUNDS } = GAME_MODEL;
+
+    if (round === ROUNDS - 1 && value === PLAYER_1.PLAY_VALUE * 2) return true;
+
+    return PLAY_VALUES.find(val => (value === val)) !== undefined;
 }

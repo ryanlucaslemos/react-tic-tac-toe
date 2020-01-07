@@ -26,7 +26,15 @@ const GAME_MODEL = {
         '1 1': 'v-border h-border',
         '1 2': 'h-border',
         '2 1': 'v-border'
-    }
+    },
+    'DRAW': {
+        'PLAY_VALUES': [-1, 0, 1],
+        'ROUND': 6,
+    },
+    'WIN': {
+        'ROUND': 4
+    },
+    'ROUNDS': 9
 };
 
 export default GAME_MODEL;
