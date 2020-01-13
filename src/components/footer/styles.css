@@ -15,7 +15,7 @@ footer {
     padding-top: 5px;
 }
 
-@media(max-height: 550px) {
+@media(max-height: 600px) {
     footer {
         position: relative;
         margin-top: 25px;
