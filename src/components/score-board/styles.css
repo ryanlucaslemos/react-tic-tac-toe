@@ -1,6 +1,6 @@
 .score-board-row {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .score-board {
@@ -9,8 +9,8 @@
     padding: 20px;
     min-height: 70px;
     background: rgb(253, 253, 253);
-    margin: 0px 5px;   
     text-align: center;
+    flex-basis: 40%;
 }
 
 .score-board h4 {
@@ -34,5 +34,7 @@
     font-size: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 0 10px;
+    flex-basis: 20%;
 }

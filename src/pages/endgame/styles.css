@@ -4,10 +4,10 @@
     align-items: center;
     border: 2px solid #75737371;
     border-radius: 4px;
-    padding: 0px 80px;
+    width: 100%;
     min-height: 200px;
     background: rgb(253, 253, 253);
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .end-game-alert h3 {
