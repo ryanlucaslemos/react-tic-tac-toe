@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
-import GAME_MODEL from '../../game.model';
 
-const EndGame = ({ lastWinner, changePlaysMatrix, changeGameStatus }) => {
-  const { GAME_STATUS } = GAME_MODEL;
-
+const EndGame = ({ lastWinner, startGame }) => {
   let alertText = 'Deu velha!!';
   let alertClass = 'end-game-alert-warning';
 
@@ -16,21 +13,11 @@ const EndGame = ({ lastWinner, changePlaysMatrix, changeGameStatus }) => {
     alertClass = 'end-game-alert-success';
   }
 
-  const restartMatrix = () => {
-    changePlaysMatrix([
-      Array(3).fill(0),
-      Array(3).fill(0),
-      Array(3).fill(0),
-    ]);
-  };
-
   const playAgain = () => {
-    restartMatrix();
-    changeGameStatus(GAME_STATUS.RUNNING);
+    startGame(true);
   };
   const playWithAnotherPlayers = () => {
-    restartMatrix();
-    changeGameStatus(GAME_STATUS.NOT_STARTED);
+    startGame();
   };
 
 
@@ -64,8 +51,7 @@ const EndGame = ({ lastWinner, changePlaysMatrix, changeGameStatus }) => {
 
 EndGame.propTypes = {
   lastWinner: PropTypes.string.isRequired,
-  changePlaysMatrix: PropTypes.func.isRequired,
-  changeGameStatus: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired,
 };
 
 export default EndGame;
