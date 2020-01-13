@@ -13,3 +13,7 @@ header {
 header i {
     margin: 0px 9px;
 }
+
+header:hover {
+    cursor: pointer;
+}
