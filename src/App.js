@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Main from './pages/main'
-import GAME_MODEL from './game.model'
+import Main from './pages/main';
+import GAME_MODEL from './game.model';
 import Game from './pages/game';
 import EndGame from './pages/endgame';
 import ScoreBoard from './components/score-board';
@@ -13,17 +13,17 @@ import './styles.css';
 function App() {
   const { GAME_STATUS } = GAME_MODEL;
 
-  //hooks
+  // hooks
   const [gameStatus, setGameStatus] = useState(GAME_STATUS.NOT_STARTED);
   const [players, setPlayers] = useState({
-    'player1': {
-      'name': '',
-      'wins': 0
+    player1: {
+      name: '',
+      wins: 0,
     },
-    'player2': {
-      'name': '',
-      'wins': 0
-    }
+    player2: {
+      name: '',
+      wins: 0,
+    },
   });
 
   const [lastWinner, setLastWinner] = useState(null);
@@ -33,25 +33,25 @@ function App() {
   const [playsMatrix, setPlaysMatrix] = useState([
     Array(3).fill(0),
     Array(3).fill(0),
-    Array(3).fill(0)
+    Array(3).fill(0),
   ]);
 
 
-  //hooksChange functions
+  // hooksChange functions
   const changeGameStatus = (status) => {
     setGameStatus(status);
-  }
+  };
   const changeLastWinner = (name) => {
     setLastWinner(name);
-  }
+  };
 
-  const savePlayerNames = fieldName => (event) => {
+  const savePlayerNames = (fieldName) => (event) => {
     setPlayers({
       ...players,
       [fieldName]: {
-        'name': event.target.value,
-        'wins': 0
-      }
+        name: event.target.value,
+        wins: 0,
+      },
     });
   };
 
@@ -61,9 +61,9 @@ function App() {
     setPlayers({
       ...players,
       [player]: {
-        'name': players[player].name,
-        'wins': players[player].wins + 1
-      }
+        name: players[player].name,
+        wins: players[player].wins + 1,
+      },
     });
   };
 
@@ -78,34 +78,46 @@ function App() {
       return;
     }
     increaseWins(player);
-  }
+  };
 
-  const changePlaysMatrix = (playsMatrix) => {
-    setPlaysMatrix(playsMatrix)
+  const changePlaysMatrix = (playMatrix) => {
+    setPlaysMatrix(playMatrix);
   };
 
 
   const render = () => {
-
     switch (gameStatus) {
       case GAME_STATUS.FINISHED:
         return (
           <div>
             <ScoreBoard players={players} draws={draws} />
-            <EndGame changeGameStatus={changeGameStatus} changePlaysMatrix={changePlaysMatrix} lastWinner={lastWinner} />
+            <EndGame
+              changeGameStatus={changeGameStatus}
+              changePlaysMatrix={changePlaysMatrix}
+              lastWinner={lastWinner}
+            />
           </div>
         );
 
       case GAME_STATUS.NOT_STARTED:
         return (
-          <Main changeGameStatus={changeGameStatus} savePlayerNames={savePlayerNames} players={players} />
+          <Main
+            changeGameStatus={changeGameStatus}
+            savePlayerNames={savePlayerNames}
+            players={players}
+          />
         );
 
       case GAME_STATUS.RUNNING:
         return (
           <div>
             <ScoreBoard players={players} draws={draws} />
-            <Game playsMatrix={playsMatrix} changePlaysMatrix={changePlaysMatrix} increaseScore={increaseScore} changeGameStatus={changeGameStatus} />
+            <Game
+              playsMatrix={playsMatrix}
+              changePlaysMatrix={changePlaysMatrix}
+              increaseScore={increaseScore}
+              changeGameStatus={changeGameStatus}
+            />
           </div>
         );
 
@@ -116,14 +128,13 @@ function App() {
           </div>
         );
     }
-
-  }
+  };
 
 
   return (
-    <div >
+    <div>
       <Header />
-      <div className='container'>
+      <div className="container">
         {render()}
       </div>
       <Footer />

@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import './styles.css'
+import './styles.css';
 
-const Header = () => {
-    return (
-        <header>
-          <i className="fab fa-react"></i> React Tic-tac-toe <i className='fab fa-slack-hash'></i> 
-        </header>
-    );
-}
+const Header = () => (
+  <header>
+    <i className="fab fa-react" />
+    {' '}
+React Tic-tac-toe
+    {' '}
+    <i className="fab fa-slack-hash" />
+  </header>
+);
 
 export default Header;
