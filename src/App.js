@@ -16,13 +16,11 @@ function App() {
   // hooks
   const [gameStatus, setGameStatus] = useState(null);
   const [players, setPlayers] = useState({});
-
   const [lastWinner, setLastWinner] = useState(null);
-
   const [draws, setDraws] = useState(0);
-
   const [playsMatrix, setPlaysMatrix] = useState([]);
 
+  // init hooks values
   const startGame = (continueGame = false) => {
     setPlaysMatrix([
       Array(3).fill(0),
@@ -48,10 +46,12 @@ function App() {
     }
   };
 
+  //  same as componentDidMount
   useEffect(() => {
     startGame();
     // eslint-disable-next-line
   }, []);
+
 
   // hooksChange functions
   const changeGameStatus = (status) => {

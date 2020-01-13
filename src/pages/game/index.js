@@ -11,7 +11,6 @@ const Game = ({
   playsMatrix,
   changePlaysMatrix,
 }) => (
-
   <Board
     playsMatrix={playsMatrix}
     changePlaysMatrix={changePlaysMatrix}

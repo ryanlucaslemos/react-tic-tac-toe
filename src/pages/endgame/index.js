@@ -34,7 +34,7 @@ const EndGame = ({ lastWinner, startGame }) => {
           onClick={playAgain}
           className="restart"
         >
-            Jogar novamente
+          Jogar novamente
         </button>
 
         <button
@@ -42,7 +42,7 @@ const EndGame = ({ lastWinner, startGame }) => {
           onClick={playWithAnotherPlayers}
           className="change-players"
         >
-            Jogar com outros jogadores
+          Jogar com outros jogadores
         </button>
       </div>
     </div>
