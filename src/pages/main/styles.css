@@ -2,7 +2,7 @@
 .users-box {
     background: #fff;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 4px;
     width: 100%;
     padding: 30px 20px;
     margin: 20px 0px;
@@ -13,8 +13,10 @@
     margin-left: 4px;
     height: 20px;
     border: 2px solid thistle;
-    border-radius: 3px;
+    border-radius: 4px;
     padding: 15px;
+    margin-bottom: 0;
+    flex: 1;
 }
 
 h5 {
@@ -40,4 +42,11 @@ button:hover {
 label {
     font-size: 20px;
     margin-right: 5px;
+    text-align: center;
+}
+
+@media(max-width: 700px) {
+    label input {
+        margin-top: 7px;
+    }
 }

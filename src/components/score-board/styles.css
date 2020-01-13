@@ -6,10 +6,10 @@
 .score-board {
     border: 2px solid #75737371;
     border-radius: 4px;
-    padding: 20px 35px;
+    padding: 20px;
     min-height: 70px;
     background: rgb(253, 253, 253);
-    margin: 40px 5px;   
+    margin: 0px 5px;   
     text-align: center;
 }
 

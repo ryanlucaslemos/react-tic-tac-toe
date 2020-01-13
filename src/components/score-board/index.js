@@ -41,7 +41,7 @@ const ScoreBoard = ({ players, draws }) => {
 };
 
 ScoreBoard.propTypes = {
-  players: PropTypes.instanceOf(Array).isRequired,
+  players: PropTypes.instanceOf(Object).isRequired,
   draws: PropTypes.number.isRequired,
 };
 
