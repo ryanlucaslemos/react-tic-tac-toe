@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Main from './pages/main';
 import GAME_MODEL from './game.model';
@@ -14,28 +14,44 @@ function App() {
   const { GAME_STATUS } = GAME_MODEL;
 
   // hooks
-  const [gameStatus, setGameStatus] = useState(GAME_STATUS.NOT_STARTED);
-  const [players, setPlayers] = useState({
-    player1: {
-      name: '',
-      wins: 0,
-    },
-    player2: {
-      name: '',
-      wins: 0,
-    },
-  });
+  const [gameStatus, setGameStatus] = useState(null);
+  const [players, setPlayers] = useState({});
 
   const [lastWinner, setLastWinner] = useState(null);
 
   const [draws, setDraws] = useState(0);
 
-  const [playsMatrix, setPlaysMatrix] = useState([
-    Array(3).fill(0),
-    Array(3).fill(0),
-    Array(3).fill(0),
-  ]);
+  const [playsMatrix, setPlaysMatrix] = useState([]);
 
+  const startGame = (continueGame = false) => {
+    setPlaysMatrix([
+      Array(3).fill(0),
+      Array(3).fill(0),
+      Array(3).fill(0),
+    ]);
+
+    if (continueGame) {
+      setGameStatus(GAME_STATUS.RUNNING);
+    } else {
+      setDraws(0);
+      setGameStatus(GAME_STATUS.NOT_STARTED);
+      setPlayers({
+        player1: {
+          name: '',
+          wins: 0,
+        },
+        player2: {
+          name: '',
+          wins: 0,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    startGame();
+    // eslint-disable-next-line
+  }, []);
 
   // hooksChange functions
   const changeGameStatus = (status) => {
@@ -84,7 +100,6 @@ function App() {
     setPlaysMatrix(playMatrix);
   };
 
-
   const render = () => {
     switch (gameStatus) {
       case GAME_STATUS.FINISHED:
@@ -92,8 +107,7 @@ function App() {
           <div>
             <ScoreBoard players={players} draws={draws} />
             <EndGame
-              changeGameStatus={changeGameStatus}
-              changePlaysMatrix={changePlaysMatrix}
+              startGame={startGame}
               lastWinner={lastWinner}
             />
           </div>
@@ -133,7 +147,7 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header startGame={startGame} />
       <div className="container">
         {render()}
       </div>
