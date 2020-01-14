@@ -1,68 +1,95 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Jogo da velha React
 
-## Available Scripts
+Uma simples implementação do jogo da velha, utilizando somente React e FontAwesome para os ícones.
 
-In the project directory, you can run:
 
-### `yarn start`
+### [Demo](https://elated-mcclintock-25d5d6.netlify.com/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Índice
+  - [Print versão web/desktop:](#print-vers%c3%a3o-webdesktop)
+  - [Print versão web/mobile:](#print-vers%c3%a3o-webmobile)
+  - [Execução da aplicação](#execu%c3%a7%c3%a3o-da-aplica%c3%a7%c3%a3o)
+  - [Modelagem do Jogo:](#modelagem-do-jogo)
+    - [Verificação de vitórias](#verifica%c3%a7%c3%a3o-de-vit%c3%b3rias)
+    - [Verificação de Empates (velha)](#verifica%c3%a7%c3%a3o-de-empates-velha)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+***
 
-### `yarn test`
+## Print versão web/desktop:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Web Demo](.github/images/web-demo.gif "Demo Web")
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Print versão web/mobile:
+<img src=".github/images/mobile-demo.gif" alt="Demo Mobile" title="Demo Mobile" width="400" height="400"/>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+***
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Execução da aplicação
+O primeiro comando serve para baixar as dependências do projeto e o segundo para executar o projeto no browser.
 
-### `yarn eject`
+Utilizando o __yarn__, execute:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+yarn
+yarn start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Utilizando o __npm__, execute:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+npm install
+npm run start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Modelagem do Jogo:
 
-## Learn More
+Uma __matriz 3x3 de zeros__ é criada no início do jogo. Cada __posição da matriz__ representa uma __celula__ do tabuleiro. O jogador __1__ recebe o valor __1__, e o __jogador 2__ recebe o valor __-1__.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+__OBS:__ Esses valores podem ser substituídos através da das posições __PLAY_VALUE__ de cada jogador da constante __GAME_MODEL__ presente em __game.model.js__.
 
-### Code Splitting
+Assim, ao clicar em uma célula verifica-se qual é o jogador atual, salva o __valor (1 ou -1)__ da sua jogada em sua determinada posição da __matriz de jogadas__. Feito isso busca-se a classe CSS da marcação do jogador atual, presente na constante __GAME_MODEL__ e substitui a classe da tag __i__ da celula.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Ao modificar a matriz, o estado muda, renderizando assim o tabuleiro com as novas jogadas.
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Verificação de vitórias
 
-### Making a Progressive Web App
+A verificação de vitórias é simples, verifica-se a matriz na horizontal, vertical e diagonal, somando-se os valores salvos nas posições.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Por exemplo o seguinte tabuleiro:
 
-### Advanced Configuration
+|   X   |       |   O   |
+| :---: | :---: | :---: |
+|   O   |   X   |   O   |
+|   X   |       |   X   |
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Que pode ser convertido em:
+|   1   |   0   |  -1   |
+| :---: | :---: | :---: |
+|  -1   |   1   |  -1   |
+|   1   |   0   |   1   |
 
-### Deployment
+Ao somar a diagonal vencendora tem-se o valor __3__. O que é feito então, é percorrer a matriz, gerando a soma de cada linha, coluna e diagonal. Essas somas são salvas em uma __matriz de resultados__. Posteriormente, verifica se alguma dessas somas é __3__ ou __-3__ (valores vencedores).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Verificação de Empates (velha)
 
-### `yarn build` fails to minify
+O jogo conta, a rodada atual. A cada jogada o valor do contador de rodadas aumenta. Sendo uma matriz 3x3 é possível então realizar __9 jogadas__. A partir da __rodada 7__ é possível inferir se o jogo finalizará em empate.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+__Pergunta__: E como fazer isso?
+
+__Resposta__: Simples, para que haja uma chance de vitória, ao menos um valor __2__ ou __-2__ deve existir nesse ponto. Então deve-se percorrer a matriz de resultados e verificar se há algum desses valores. Senão encontrar nenhum significa que nenhum dos dois jogadores conseguirá vencer.
+Porém há o caso em que o jogador consegue a pontuação (2 ou -2) porém mesmo assim será velha. Por exemplo (quando o jogador 1 assume o x e o 2 assume o O):
+|   X   |   O   |   X   |
+| :---: | :---: | :---: |
+|   X   |   O   |   O   |
+|   O   |       |   X   |
+
+Que pode ser convertido em:
+|   1   |  -1   |   1   |
+| :---: | :---: | :---: |
+|   1   |  -1   |  -1   |
+|  -1   |   0   |   1   |
+
+Ao somar a segunda coluna, o resultado dá um dos valores em que é possível a vitória, porém, como só resta uma jogada, do outro jogador o jogo termina em empate. O algoritmo prediz o empate antes do preenchimento de todas as posições. Então se for a última rodada, e restar somente uma posição, o algoritmo descarta a chance do segundo jogador de ganhar.
