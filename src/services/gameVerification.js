@@ -55,20 +55,24 @@ function hasPlayerTwoWon(playsMatrix) {
 }
 
 
-function isADrawValue(value, round) {
-  const { DRAW: { PLAY_VALUES }, PLAYERS: { PLAYER_1 }, ROUNDS } = GAME_MODEL;
+function getCanWinValues(round) {
+  const { PLAYERS: { PLAYER_1, PLAYER_2 }, ROUNDS } = GAME_MODEL;
 
-  if (round === ROUNDS - 1 && value === PLAYER_1.PLAY_VALUE * 2) return true;
+  const canWinValues = [PLAYER_2.PLAY_VALUE * 2];
 
-  return PLAY_VALUES.find((val) => (value === val)) !== undefined;
+  if (round === ROUNDS - 1) canWinValues.push(PLAYER_1.PLAY_VALUE * 2);
+
+  return canWinValues;
 }
 
 export function verifyDraw(playsMatrix, round) {
   const pointsMatrix = getPointsMatrix(playsMatrix);
 
-  const drawPointsCount = pointsMatrix.filter((value) => isADrawValue(value, round)).length;
+  const canWinValues = getCanWinValues(round);
 
-  return drawPointsCount === pointsMatrix.length;
+  return pointsMatrix.find(
+    (value) => canWinValues[0] === value || canWinValues[-1] === value,
+  ) === undefined;
 }
 
 export function verifyWin(playsMatrix) {
