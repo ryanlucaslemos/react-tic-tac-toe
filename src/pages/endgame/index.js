@@ -50,8 +50,12 @@ const EndGame = ({ lastWinner, startGame }) => {
 };
 
 EndGame.propTypes = {
-  lastWinner: PropTypes.string.isRequired,
+  lastWinner: PropTypes.string,
   startGame: PropTypes.func.isRequired,
+};
+
+EndGame.defaultProps = {
+  lastWinner: null,
 };
 
 export default EndGame;
