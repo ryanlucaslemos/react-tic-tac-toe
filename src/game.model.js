@@ -28,7 +28,7 @@ const GAME_MODEL = {
     '2 1': 'v-border',
   },
   DRAW: {
-    ROUND: 6,
+    ROUND: 7,
   },
   WIN: {
     ROUND: 4,

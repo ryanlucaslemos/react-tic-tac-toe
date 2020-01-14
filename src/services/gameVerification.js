@@ -58,9 +58,9 @@ function hasPlayerTwoWon(playsMatrix) {
 function getCanWinValues(round) {
   const { PLAYERS: { PLAYER_1, PLAYER_2 }, ROUNDS } = GAME_MODEL;
 
-  const canWinValues = [PLAYER_2.PLAY_VALUE * 2];
+  const canWinValues = [PLAYER_1.PLAY_VALUE * 2];
 
-  if (round === ROUNDS - 1) canWinValues.push(PLAYER_1.PLAY_VALUE * 2);
+  if (round === ROUNDS - 1) canWinValues.push(PLAYER_2.PLAY_VALUE * 2);
 
   return canWinValues;
 }
