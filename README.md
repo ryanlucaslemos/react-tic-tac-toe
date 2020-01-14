@@ -66,6 +66,7 @@ Por exemplo o seguinte tabuleiro:
 |   X   |       |   X   |
 
 Que pode ser convertido em:
+
 |   1   |   0   |  -1   |
 | :---: | :---: | :---: |
 |  -1   |   1   |  -1   |
@@ -81,12 +82,14 @@ __Pergunta__: E como fazer isso?
 
 __Resposta__: Simples, para que haja uma chance de vitória, ao menos um valor __2__ ou __-2__ deve existir nesse ponto. Então deve-se percorrer a matriz de resultados e verificar se há algum desses valores. Senão encontrar nenhum significa que nenhum dos dois jogadores conseguirá vencer.
 Porém há o caso em que o jogador consegue a pontuação (2 ou -2) porém mesmo assim será velha. Por exemplo (quando o jogador 1 assume o x e o 2 assume o O):
+
 |   X   |   O   |   X   |
 | :---: | :---: | :---: |
 |   X   |   O   |   O   |
 |   O   |       |   X   |
 
 Que pode ser convertido em:
+
 |   1   |  -1   |   1   |
 | :---: | :---: | :---: |
 |   1   |  -1   |  -1   |
