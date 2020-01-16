@@ -65,7 +65,7 @@ function getCanWinValues(round) {
   return canWinValues;
 }
 
-export function verifyDraw(playsMatrix, round) {
+export function draw(playsMatrix, round) {
   const pointsMatrix = getPointsMatrix(playsMatrix);
 
   const canWinValues = getCanWinValues(round);

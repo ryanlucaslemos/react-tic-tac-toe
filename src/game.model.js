@@ -11,7 +11,7 @@ const GAME_MODEL = {
       PLAY_VALUE: -1,
       WIN_VALUE: -3,
     },
-    NONE: {
+    EMPTY: {
       PLAY_VALUE: 0,
     },
   },
@@ -28,10 +28,10 @@ const GAME_MODEL = {
     '2 1': 'v-border',
   },
   DRAW: {
-    ROUND: 7,
+    MIN_ROUND: 7,
   },
   WIN: {
-    ROUND: 4,
+    MIN_ROUND: 4,
   },
   ROUNDS: 9,
 };
