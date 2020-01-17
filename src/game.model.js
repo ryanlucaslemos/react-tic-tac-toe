@@ -1,38 +1,40 @@
 
 const GAME_MODEL = {
-  PLAYERS: {
-    PLAYER_1: {
-      CSS_CLASS: 'fas fa-times fa-2x',
-      PLAY_VALUE: 1,
-      WIN_VALUE: 3,
-    },
-    PLAYER_2: {
-      CSS_CLASS: 'far fa-circle fa-2x',
-      PLAY_VALUE: -1,
-      WIN_VALUE: -3,
-    },
-    EMPTY: {
-      PLAY_VALUE: 0,
-    },
+  MOVEMENT_VALUE: {
+    PLAYER_1: 1,
+    PLAYER_2: -1,
+    EMPTY: 0,
   },
+
+  MARK_ICONS_CSS_CLASS: {
+    PLAYER_1: 'fas fa-times fa-2x',
+    PLAYER_2: 'far fa-circle fa-2x',
+  },
+
+  WIN_WITH: {
+    PLAYER_1: 3,
+    PLAYER_2: -3,
+  },
+
   GAME_STATUS: {
     NOT_STARTED: 0,
     RUNNING: 1,
     FINISHED: 2,
   },
-  CELL_STYLES: {
+
+  BORDERED_CELL_CSS_CLASSES: {
     '0 1': 'v-border',
     '1 0': 'h-border',
     '1 1': 'v-border h-border',
     '1 2': 'h-border',
     '2 1': 'v-border',
   },
-  DRAW: {
-    MIN_ROUND: 7,
+
+  MIN_ROUND: {
+    DRAW: 7,
+    WIN: 4,
   },
-  WIN: {
-    MIN_ROUND: 4,
-  },
+
   ROUNDS: 9,
 };
 
