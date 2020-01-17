@@ -4,13 +4,15 @@
 }
 
 .score-board {
-    border: 2px solid #75737371;
     border-radius: 4px;
     padding: 20px;
     min-height: 70px;
     background: rgb(253, 253, 253);
     text-align: center;
     flex-basis: 40%;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+    border-radius: 5px;
+    background-color: #fff;
 }
 
 .score-board h4 {
@@ -37,4 +39,8 @@
     justify-content: center;
     margin: 0 10px;
     flex-basis: 20%;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 30px;
 }

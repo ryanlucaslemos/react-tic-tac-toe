@@ -1,47 +1,48 @@
 .end-game-alert {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #75737371;
-    border-radius: 4px;
-    width: 100%;
-    min-height: 200px;
-    background: rgb(253, 253, 253);
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  min-height: 200px;
+  box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+  border-radius: 5px;
+  color: #fff;
+  margin: 20px 0;
 }
 
 .end-game-alert h3 {
-    font-size: 25px;
-    font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-transform: uppercase;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
 }
 
 .end-game-alert-success {
-    color: rgb(9, 207, 9);
+  background: rgb(4, 228, 32);
 }
 
 .end-game-alert-warning {
-    color: rgba(58, 58, 58, 0.644);
+  background: rgba(58, 58, 58, 0.644);
 }
 
 .restart {
-    background: #0e48c5;
-    margin: 4px;
+  background: #0e48c5;
+  margin: 4px;
 }
 
 .restart:hover {
-    background: #2759c5;
+  background: #2759c5;
 }
 
 .change-players {
-    background: #f1ef4b;
-    color: rgb(41, 40, 40);
-    margin: 4px;
-    width: auto;
+  background: #f1ef4b;
+  color: rgb(41, 40, 40);
+  margin: 4px;
+  width: auto;
 }
 
 .change-players:hover {
-    background: #faf746;
-    border: none;
+  background: #faf746;
+  border: none;
 }
