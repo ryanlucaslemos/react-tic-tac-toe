@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
 import GAME_MODEL from '../../game.model';
 
 const ScoreBoard = ({ playerNames, score }) => {
-  const [draws, setDraws] = useState(0);
-
-  // eslint-disable-next-line no-unused-vars
-  function increaseDraws() {
-    setDraws(draws + 1);
-  }
-
   const { MARK_ICONS_CSS_CLASS } = GAME_MODEL;
 
   return (
@@ -30,7 +23,7 @@ const ScoreBoard = ({ playerNames, score }) => {
         <h4 className="draws-style">
           Empates:
           {' '}
-          {draws}
+          {score.draws}
         </h4>
         <div className="score-board">
           <h4>{playerNames.player2}</h4>
