@@ -28,7 +28,7 @@ function Game({
     } else if (draw) {
       changeGameStatus(GAME_STATUS.FINISHED);
       setWinner(null);
-      increaseScore('draw');
+      increaseScore('draws');
     }
   }
 
