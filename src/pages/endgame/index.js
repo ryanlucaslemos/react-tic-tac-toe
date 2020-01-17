@@ -1,37 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ScoreBoard from '../../components/score-board';
 import './styles.css';
 
-const EndGame = ({ lastWinner, startGame }) => {
+
+const EndGame = ({
+  restartGame, playerNames, score, winner, restartGameWithOtherPlayers,
+}) => {
   let alertText = 'Deu velha!!';
   let alertClass = 'end-game-alert-warning';
 
-
-  if (lastWinner !== null) {
-    alertText = `Parabéns ${lastWinner} você venceu!`;
+  if (winner !== null) {
+    alertText = `Parabéns ${winner} você venceu!`;
     alertClass = 'end-game-alert-success';
   }
 
-  const playAgain = () => {
-    startGame(true);
-  };
-  const playWithAnotherPlayers = () => {
-    startGame();
-  };
-
-
   return (
-    <div className="">
+    <>
+      <ScoreBoard playerNames={playerNames} score={score} />
       <div className="row">
-        <div className="end-game-alert">
-          <h3 className={alertClass}>{alertText}</h3>
+        <div className={`end-game-alert ${alertClass}`}>
+          <h3>{alertText}</h3>
         </div>
       </div>
       <div className="row">
         <button
           type="button"
-          onClick={playAgain}
+          onClick={restartGame}
           className="restart"
         >
           Jogar novamente
@@ -39,23 +35,26 @@ const EndGame = ({ lastWinner, startGame }) => {
 
         <button
           type="button"
-          onClick={playWithAnotherPlayers}
+          onClick={restartGameWithOtherPlayers}
           className="change-players"
         >
           Jogar com outros jogadores
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
 EndGame.propTypes = {
-  lastWinner: PropTypes.string,
-  startGame: PropTypes.func.isRequired,
+  winner: PropTypes.string,
+  restartGame: PropTypes.func.isRequired,
+  restartGameWithOtherPlayers: PropTypes.func.isRequired,
+  playerNames: PropTypes.instanceOf(Object).isRequired,
+  score: PropTypes.instanceOf(Object).isRequired,
 };
 
 EndGame.defaultProps = {
-  lastWinner: null,
+  winner: null,
 };
 
 export default EndGame;

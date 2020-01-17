@@ -1,38 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
 import GAME_MODEL from '../../game.model';
 
-const ScoreBoard = ({ players, draws }) => {
-  const { PLAYERS: { PLAYER_1, PLAYER_2 } } = GAME_MODEL;
+const ScoreBoard = ({ playerNames, score }) => {
+  const [draws, setDraws] = useState(0);
+
+  // eslint-disable-next-line no-unused-vars
+  function increaseDraws() {
+    setDraws(draws + 1);
+  }
+
+  const { MARK_ICONS_CSS_CLASS } = GAME_MODEL;
+
   return (
     <div>
       <div className="score-board-row">
         <div className="score-board">
-          <h4>{players.player1.name}</h4>
+          <h4>{playerNames.player1}</h4>
           <p>
             <b>Vitórias:</b>
             {' '}
-            {players.player1.wins}
+            {score.player1}
           </p>
           <hr />
-          <i className={PLAYER_1.CSS_CLASS} />
+          <i className={MARK_ICONS_CSS_CLASS.PLAYER_1} />
         </div>
         <h4 className="draws-style">
-            Empates:
+          Empates:
           {' '}
           {draws}
         </h4>
         <div className="score-board">
-          <h4>{players.player2.name}</h4>
+          <h4>{playerNames.player2}</h4>
           <p>
             <b>Vitórias:</b>
             {' '}
-            {players.player2.wins}
+            {score.player2}
           </p>
           <hr />
-          <i className={PLAYER_2.CSS_CLASS} />
+          <i className={MARK_ICONS_CSS_CLASS.PLAYER_2} />
         </div>
       </div>
 
@@ -41,8 +49,8 @@ const ScoreBoard = ({ players, draws }) => {
 };
 
 ScoreBoard.propTypes = {
-  players: PropTypes.instanceOf(Object).isRequired,
-  draws: PropTypes.number.isRequired,
+  playerNames: PropTypes.instanceOf(Object).isRequired,
+  score: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default ScoreBoard;

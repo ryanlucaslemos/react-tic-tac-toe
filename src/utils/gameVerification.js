@@ -38,7 +38,7 @@ function getPointsMatrix(playsMatrix) {
 function hasPlayerOneWon(playsMatrix) {
   const pointsMatrix = getPointsMatrix(playsMatrix);
   const isWinner = pointsMatrix.find(
-    (val) => val === GAME_MODEL.PLAYERS.PLAYER_1.WIN_VALUE,
+    (val) => val === GAME_MODEL.WIN_WITH.PLAYER_1,
   ) !== undefined;
 
   return isWinner;
@@ -48,7 +48,7 @@ function hasPlayerOneWon(playsMatrix) {
 function hasPlayerTwoWon(playsMatrix) {
   const pointsMatrix = getPointsMatrix(playsMatrix);
   const isWinner = pointsMatrix.find(
-    (val) => val === GAME_MODEL.PLAYERS.PLAYER_2.WIN_VALUE,
+    (val) => val === GAME_MODEL.WIN_WITH.PLAYER_2,
   ) !== undefined;
 
   return isWinner;
@@ -56,16 +56,22 @@ function hasPlayerTwoWon(playsMatrix) {
 
 
 function getCanWinValues(round) {
-  const { PLAYERS: { PLAYER_1, PLAYER_2 }, ROUNDS } = GAME_MODEL;
+  const { MOVEMENT_VALUE, ROUNDS } = GAME_MODEL;
 
-  const canWinValues = [PLAYER_1.PLAY_VALUE * 2];
+  const canWinValues = [MOVEMENT_VALUE.PLAYER_1 * 2];
 
-  if (round === ROUNDS - 1) canWinValues.push(PLAYER_2.PLAY_VALUE * 2);
+  if (round === ROUNDS - 1) canWinValues.push(MOVEMENT_VALUE.PLAYER_2 * 2);
 
   return canWinValues;
 }
 
-export function draw(playsMatrix, round) {
+function draw(playsMatrix, round) {
+  const { MIN_ROUND } = GAME_MODEL;
+
+  if (round < MIN_ROUND.DRAW) {
+    return null;
+  }
+
   const pointsMatrix = getPointsMatrix(playsMatrix);
 
   const canWinValues = getCanWinValues(round);
@@ -75,20 +81,27 @@ export function draw(playsMatrix, round) {
   ) === undefined;
 }
 
-export function verifyWin(playsMatrix) {
-  if (hasPlayerOneWon(playsMatrix)) {
-    return {
-      done: true,
-      winner: 'player1',
-    };
-  } if (hasPlayerTwoWon(playsMatrix)) {
-    return {
-      done: true,
-      winner: 'player2',
-    };
+
+function winner(playsMatrix, round) {
+  const { MIN_ROUND } = GAME_MODEL;
+  if (round < MIN_ROUND.WIN) {
+    return null;
   }
 
+  if (hasPlayerOneWon(playsMatrix)) {
+    return 'player1';
+  }
+
+  if (hasPlayerTwoWon(playsMatrix)) {
+    return 'player2';
+  }
+
+  return null;
+}
+
+export function getWinnerAndDraw(playsMatrix, round) {
   return {
-    done: false,
+    winner: winner(playsMatrix, round),
+    draw: draw(playsMatrix, round),
   };
 }

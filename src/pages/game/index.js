@@ -3,27 +3,50 @@ import PropTypes from 'prop-types';
 
 import './styles.css';
 import Board from '../../components/board';
+import ScoreBoard from '../../components/score-board';
 
+import { getWinnerAndDraw } from '../../utils/gameVerification';
 
-const Game = ({
+import GAME_MODEL from '../../game.model';
+
+function Game({
   changeGameStatus,
   increaseScore,
-  playsMatrix,
-  changePlaysMatrix,
-}) => (
-  <Board
-    playsMatrix={playsMatrix}
-    changePlaysMatrix={changePlaysMatrix}
-    changeGameStatus={changeGameStatus}
-    increaseScore={increaseScore}
-  />
-);
+  score,
+  playerNames,
+  setWinner,
+}) {
+  const { GAME_STATUS } = GAME_MODEL;
+
+  function hasGameDone(newPlayMatrix, round) {
+    const { winner, draw } = getWinnerAndDraw(newPlayMatrix, round);
+
+    if (winner) {
+      changeGameStatus(GAME_STATUS.FINISHED);
+      setWinner(playerNames[winner]);
+      increaseScore(winner);
+    } else if (draw) {
+      changeGameStatus(GAME_STATUS.FINISHED);
+      setWinner(null);
+      increaseScore('draw');
+    }
+  }
+
+  return (
+    <div className="game-container">
+      <ScoreBoard playerNames={playerNames} score={score} />
+      <Board hasGameDone={hasGameDone} />
+    </div>
+  );
+}
+
 
 Game.propTypes = {
   changeGameStatus: PropTypes.func.isRequired,
   increaseScore: PropTypes.func.isRequired,
-  playsMatrix: PropTypes.instanceOf(Array).isRequired,
-  changePlaysMatrix: PropTypes.func.isRequired,
+  playerNames: PropTypes.instanceOf(Object).isRequired,
+  score: PropTypes.instanceOf(Object).isRequired,
+  setWinner: PropTypes.func.isRequired,
 };
 
 export default Game;

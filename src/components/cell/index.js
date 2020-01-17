@@ -4,37 +4,53 @@ import PropTypes from 'prop-types';
 import './styles.css';
 import GAME_MODEL from '../../game.model';
 
-const Cell = ({ cell, callbackParent, cellKey }) => {
-  const { PLAYERS: { PLAYER_1, PLAYER_2 } } = GAME_MODEL;
+const Cell = ({
+  callbackParent, cellKey, cellContent, round,
+}) => {
+  const { MARK_ICONS_CSS_CLASS, MOVEMENT_VALUE, BORDERED_CELL_CSS_CLASSES } = GAME_MODEL;
 
-  let classe = '';
+  const classes = {
+    [MOVEMENT_VALUE.PLAYER_1]: MARK_ICONS_CSS_CLASS.PLAYER_1,
+    [MOVEMENT_VALUE.PLAYER_2]: MARK_ICONS_CSS_CLASS.PLAYER_2,
+  };
 
-  if (cell === PLAYER_2.PLAY_VALUE) {
-    classe = PLAYER_2.CSS_CLASS;
-  } else if (cell === PLAYER_1.PLAY_VALUE) {
-    classe = PLAYER_1.CSS_CLASS;
+  function makeAMove() {
+    if (cellContent !== MOVEMENT_VALUE.EMPTY) return;
+
+    const [parentIndex, index] = cellKey.split(' ');
+
+    let newcellContent = null;
+
+    if (round % 2 !== 0) {
+      newcellContent = MOVEMENT_VALUE.PLAYER_1;
+    } else {
+      newcellContent = MOVEMENT_VALUE.PLAYER_2;
+    }
+
+    callbackParent(index, parentIndex, newcellContent);
   }
 
   return (
     <div
       className={`${
-        GAME_MODEL.CELL_STYLES[cellKey] === undefined
+        BORDERED_CELL_CSS_CLASSES[cellKey] === undefined
           ? ''
-          : GAME_MODEL.CELL_STYLES[cellKey]} cell`}
-      onClick={callbackParent}
+          : BORDERED_CELL_CSS_CLASSES[cellKey]} cell`}
+      onClick={makeAMove}
       onKeyDown={callbackParent}
       role="button"
       tabIndex={0}
     >
-      <i className={classe} />
+      <i className={classes[cellContent]} />
     </div>
   );
 };
 
 Cell.propTypes = {
-  cell: PropTypes.number.isRequired,
   callbackParent: PropTypes.func.isRequired,
   cellKey: PropTypes.string.isRequired,
+  cellContent: PropTypes.number.isRequired,
+  round: PropTypes.number.isRequired,
 };
 
 export default Cell;

@@ -5,10 +5,10 @@ import './styles.css';
 
 import GAME_MODEL from '../../game.model';
 
-const Main = ({ changeGameStatus, players, savePlayerNames }) => {
+const Main = ({ changeGameStatus, playerNames, savePlayerNames }) => {
   const enviaJogadores = (evt) => {
     evt.preventDefault();
-    if (players.player1.name === '' || players.player2.name === '') {
+    if (playerNames.player1 === '' || playerNames.player2 === '') {
       // eslint-disable-next-line no-alert
       alert('Você deve preencher os nomes dos jogadores');
       return;
@@ -32,7 +32,7 @@ const Main = ({ changeGameStatus, players, savePlayerNames }) => {
                   name="player1name"
                   onChange={savePlayerNames('player1')}
                   type="text"
-                  value={players.player1.name}
+                  value={playerNames.player1}
                 />
               </label>
             </div>
@@ -53,7 +53,7 @@ const Main = ({ changeGameStatus, players, savePlayerNames }) => {
                   name="player2name"
                   type="text"
                   onChange={savePlayerNames('player2')}
-                  value={players.player2.name}
+                  value={playerNames.player2}
                 />
 
               </label>
@@ -73,7 +73,7 @@ const Main = ({ changeGameStatus, players, savePlayerNames }) => {
 
 Main.propTypes = {
   changeGameStatus: PropTypes.func.isRequired,
-  players: PropTypes.objectOf(PropTypes.object).isRequired,
+  playerNames: PropTypes.objectOf(String).isRequired,
   savePlayerNames: PropTypes.func.isRequired,
 };
 

@@ -1,50 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.css';
 import Cell from '../cell';
-import GAME_MODEL from '../../game.model';
-import { verifyWin, draw } from '../../utils/gameVerification';
 
-const Board = ({
-  playsMatrix, changePlaysMatrix, changeGameStatus, increaseScore,
-}) => {
+const Board = ({ hasGameDone }) => {
   const [round, setRound] = useState(1);
 
-  const { PLAYERS: { PLAYER_1, PLAYER_2, EMPTY }, GAME_STATUS } = GAME_MODEL;
+  const [playsMatrix, setPlaysMatrix] = useState([]);
 
-  const makeAMove = (cellKey) => () => {
-    const [parentIndex, index] = cellKey.split(' ');
+  useEffect(() => {
+    setPlaysMatrix([
+      Array(3).fill(0),
+      Array(3).fill(0),
+      Array(3).fill(0),
+    ]);
+  }, []);
 
+  function changeBoard(index, parentIndex, value) {
     const newPlayMatrix = playsMatrix.concat([]);
-
-    if (newPlayMatrix[parentIndex][index] !== EMPTY.PLAY_VALUE) return;
-
-    if (round % 2 !== 0) {
-      newPlayMatrix[parentIndex][index] = PLAYER_1.PLAY_VALUE;
-    } else {
-      newPlayMatrix[parentIndex][index] = PLAYER_2.PLAY_VALUE;
-    }
-
-    const game = verifyWin(newPlayMatrix);
-
-    if (round > GAME_MODEL.WIN.MIN_ROUND && game.done) {
-      increaseScore(game.winner);
-      changeGameStatus(GAME_STATUS.FINISHED);
-    } else if (round > GAME_MODEL.DRAW.MIN_ROUND && draw(playsMatrix, round)) {
-      increaseScore();
-      changeGameStatus(GAME_STATUS.FINISHED);
-    }
-
-    changePlaysMatrix(newPlayMatrix);
+    newPlayMatrix[parentIndex][index] = value;
+    setPlaysMatrix(newPlayMatrix);
     setRound(round + 1);
-  };
+    hasGameDone(newPlayMatrix, round);
+  }
 
-  const renderCell = (parentKey) => (cellValue, index) => {
+  const renderCell = (parentKey) => (cellContent, index) => {
     const cellKey = `${parentKey} ${index}`;
 
     return (
-      <Cell key={cellKey} cellKey={cellKey} cell={cellValue} callbackParent={makeAMove(cellKey)} />
+      <Cell
+        key={cellKey}
+        cellKey={cellKey}
+        cellContent={cellContent}
+        callbackParent={changeBoard}
+        round={round}
+      />
     );
   };
 
@@ -62,10 +53,7 @@ const Board = ({
 };
 
 Board.propTypes = {
-  playsMatrix: PropTypes.instanceOf(Array).isRequired,
-  changePlaysMatrix: PropTypes.func.isRequired,
-  changeGameStatus: PropTypes.func.isRequired,
-  increaseScore: PropTypes.func.isRequired,
+  hasGameDone: PropTypes.func.isRequired,
 };
 
 export default Board;
