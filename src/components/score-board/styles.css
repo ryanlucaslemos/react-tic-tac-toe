@@ -1,46 +1,42 @@
 .score-board-row {
-    display: flex;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
 }
 
 .score-board {
-    border-radius: 4px;
-    padding: 20px;
-    min-height: 70px;
-    background: rgb(253, 253, 253);
-    text-align: center;
-    flex-basis: 40%;
-    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
-    border-radius: 5px;
-    background-color: #fff;
+  padding: 20px;
+  min-height: 70px;
+  background: rgb(253, 253, 253);
+  text-align: center;
+  box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 .score-board h4 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .score-board p {
-    font-size: 17px;
-    margin-bottom: 10px;
+  font-size: 17px;
+  margin-bottom: 10px;
 }
 
 .score-board hr {
-    margin: 8px 0px;
+  margin: 8px 0px;
 }
 
 .draws-style {
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 10px;
-    flex-basis: 20%;
-    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
-    border-radius: 5px;
-    background-color: #fff;
-    padding: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+  border-radius: 5px;
+  background-color: #fff;
 }
