@@ -31,7 +31,7 @@ const GAME_MODEL = {
   },
 
   MIN_ROUND: {
-    DRAW: 7,
+    DRAW: 8,
     WIN: 4,
   },
 
